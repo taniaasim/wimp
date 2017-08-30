@@ -22,7 +22,7 @@ public class Movie {
 	private Long budget;
 	
 	
-	@Column (length=500, nullable=false)
+	@Column(length=500, nullable=false)
 	private String distributer;
 
 	

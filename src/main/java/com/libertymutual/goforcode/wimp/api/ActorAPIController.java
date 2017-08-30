@@ -1,5 +1,6 @@
 package com.libertymutual.goforcode.wimp.api;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
