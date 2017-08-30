@@ -1,9 +1,17 @@
 package com.libertymutual.goforcode.wimp.models;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 public class Actor {
 
@@ -18,6 +26,9 @@ public class Actor {
 	@Column (length=75)
 	private String lastName;
 	
+	//@JsonIgnore
+	@ManyToMany(mappedBy="actors")
+	private Set<Movie> movies;
 	
 	private Long activeSinceYear;
 	
@@ -72,6 +83,16 @@ public class Actor {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+
+	public Set<Movie> getMovies() {
+		return movies;
+	}
+
+
+	public void setMovies(Set<Movie> movies) {
+		this.movies = movies;
 	}
 	
 }

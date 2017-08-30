@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.libertymutual.goforcode.wimp.models.Actor;
 import com.libertymutual.goforcode.wimp.models.Movie;
+import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 import com.libertymutual.goforcode.wimp.repositories.MovieRepository;
 
 
@@ -22,9 +23,11 @@ import com.libertymutual.goforcode.wimp.repositories.MovieRepository;
 public class MovieAPIController {
 
 	private MovieRepository movieRepo;
+	private ActorRepository actorRepo;
 
-	public MovieAPIController(MovieRepository movieRepo) {
+	public MovieAPIController(MovieRepository movieRepo, ActorRepository actorRepo) {
 		this.movieRepo = movieRepo;
+		this.actorRepo = actorRepo;
 		
 		Movie movie = new Movie("Snakes on a Plane", "MGM");
 		movieRepo.save(movie);
@@ -47,6 +50,17 @@ public class MovieAPIController {
 		if (movie == null) {
 			throw new StuffNotFoundException();
 		}
+		return movie;
+	}
+	
+	// THIS IS BRAND NEW!!!!! 
+	@PostMapping("{movieId}/actors")
+	public Movie associateAnActor(@PathVariable long movieId, @RequestBody Actor actor) {
+		Movie movie = movieRepo.findOne(movieId);
+		actor = actorRepo.findOne(actor.getId());
+		
+		movie.addActor(actor);
+		movieRepo.save(movie);
 		return movie;
 	}
 	

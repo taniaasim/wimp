@@ -1,9 +1,17 @@
 package com.libertymutual.goforcode.wimp.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 public class Movie {
 
@@ -17,6 +25,11 @@ public class Movie {
 	
 	
 	private Date releaseDate;
+	
+
+	@ManyToMany
+	private Set<Actor> actors;
+	
 	
 	
 	private Long budget;
@@ -36,6 +49,14 @@ public class Movie {
 		this.distributor = distributor;
 	}
 		
+	
+	
+	public void addActor(Actor actor) {
+		if (actors == null) {
+			actors = new HashSet<Actor>();
+		}
+		actors.add(actor);
+	}
 	
 
 	public Long getId() {
@@ -84,6 +105,18 @@ public class Movie {
 
 
 	public void setDistributer(String distributor) {
+		this.distributor = distributor;
+	}
+
+	public Set<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(Set<Actor> actors) {
+		this.actors = actors;
+	}
+
+	public void setDistributor(String distributor) {
 		this.distributor = distributor;
 	}
 	

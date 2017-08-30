@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.libertymutual.goforcode.wimp.models.Actor;
+import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
+import com.libertymutual.goforcode.wimp.models.Movie;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 
 
@@ -57,6 +59,13 @@ public class ActorAPIController {
 		if (actor == null) {
 			throw new StuffNotFoundException();
 		}
+//		ActorWithMovies newActor = new ActorWithMovies();
+//		newActor.setActiveSinceYear(actor.getActiveSinceYear());
+//		newActor.setId(actor.getId());
+//		newActor.setBirthDate(actor.getBirthDate());
+//		newActor.setMovies(actor.getMovies());
+//		newActor.setFirstName(actor.getFirstName());
+//		newActor.setLastName(actor.getLastName());
 		return actor;
 	}
 	
@@ -70,6 +79,8 @@ public class ActorAPIController {
 			return null;
 		}
 	}
+	
+
 	
 	@PostMapping("") // requestbody will turn the json into that object
 	public Actor create(@RequestBody Actor actor) {
