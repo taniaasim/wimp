@@ -23,7 +23,7 @@ public class Movie {
 	
 	
 	@Column(length=500, nullable=false)
-	private String distributer;
+	private String distributor;
 
 	
 	// need to have a no param constructor to work
@@ -31,9 +31,9 @@ public class Movie {
 		
 	}
 	
-	public Movie(String title, String distributer) {
+	public Movie(String title, String distributor) {
 		this.title = title;
-		this.distributer = distributer;
+		this.distributor = distributor;
 	}
 		
 	
@@ -78,13 +78,13 @@ public class Movie {
 	}
 
 
-	public String getDistributer() {
-		return distributer;
+	public String getDistributor() {
+		return distributor;
 	}
 
 
-	public void setDistributer(String distributer) {
-		this.distributer = distributer;
+	public void setDistributer(String distributor) {
+		this.distributor = distributor;
 	}
 	
 	
