@@ -1,7 +1,6 @@
 package com.libertymutual.goforcode.wimp.api;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,44 +14,49 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.libertymutual.goforcode.wimp.models.Actor;
-import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
-import com.libertymutual.goforcode.wimp.models.Movie;
+import com.libertymutual.goforcode.wimp.models.Award;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
-
-
+import com.libertymutual.goforcode.wimp.repositories.AwardRepository;
 
 @RestController
 @RequestMapping("/api/actors")
 public class ActorAPIController {
 	
 	private ActorRepository actorRepo;
+	private AwardRepository awardRepo;
 
-	public ActorAPIController(ActorRepository actorRepo) {
+	public ActorAPIController(ActorRepository actorRepo, AwardRepository awardRepo) {
 		this.actorRepo = actorRepo;
+		this.awardRepo = awardRepo;
 		
 		Actor actor = new Actor();
 		actor.setFirstName("Brad");
+		actor.setLastName("Pitt");
 		actorRepo.save(actor);
 		
 		actor = new Actor();
 		actor.setFirstName("Jim");
+		actor.setLastName("Carey");
 		actorRepo.save(actor);
 		
 		actor = new Actor();
 		actor.setFirstName("Bruce");
+		actor.setLastName("Willis");
 		actorRepo.save(actor);
 		
 		actor = new Actor();
 		actor.setFirstName("Jennifer");
+		actor.setLastName("Lawrence");
 		actorRepo.save(actor);
 	}
-	
 	
 	@GetMapping("") 
 	public List<Actor> getAll() {
 		return actorRepo.findAll();
 	}
 	
+	// Curtis, I know you hate commented code but I need to keep this commented code
+	// here for my notes.
 	@GetMapping("{id}")
 	public Actor getOne(@PathVariable long id) throws StuffNotFoundException {
 		Actor actor = actorRepo.findOne(id);
@@ -80,7 +84,15 @@ public class ActorAPIController {
 		}
 	}
 	
-
+	@PostMapping("{actorId}/awards")
+	public Actor associateAnActor(@PathVariable long actorId, @RequestBody Award award) {
+		Actor actor = actorRepo.findOne(actorId); 
+		award = awardRepo.findOne(award.getId()); 
+		
+		actor.addAward(award); 
+		actorRepo.save(actor); 
+		return actor;
+	}
 	
 	@PostMapping("") // requestbody will turn the json into that object
 	public Actor create(@RequestBody Actor actor) {

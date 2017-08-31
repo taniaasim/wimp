@@ -1,13 +1,11 @@
 package com.libertymutual.goforcode.wimp.models;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
@@ -34,6 +32,10 @@ public class Actor {
 	
 
 	private Date birthDate;
+
+	
+	@OneToMany
+	private Set<Award> awards;
 
 
 	public Long getId() {
@@ -93,6 +95,25 @@ public class Actor {
 
 	public void setMovies(Set<Movie> movies) {
 		this.movies = movies;
+	}
+
+
+	public void addAward(Award award) {
+		if (awards == null) {
+			awards = new HashSet<Award>();
+		}
+		awards.add(award);
+		
+	}
+
+
+	public Set<Award> getAwards() {
+		return awards;
+	}
+
+
+	public void setAwards(Set<Award> awards) {
+		this.awards = awards;
 	}
 	
 }
