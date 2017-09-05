@@ -54,7 +54,8 @@ public class Movie {
 		actors.add(actor);
 	}
 	
-
+// GETTERS AND SETTERS START HERE
+	
 	public Long getId() {
 		return id;
 	}
@@ -100,7 +101,7 @@ public class Movie {
 	}
 
 
-	public void setDistributer(String distributor) {
+	public void setDistributor(String distributor) {
 		this.distributor = distributor;
 	}
 
@@ -112,10 +113,5 @@ public class Movie {
 		this.actors = actors;
 	}
 
-	public void setDistributor(String distributor) {
-		this.distributor = distributor;
-	}
-	
-	
 	
 }

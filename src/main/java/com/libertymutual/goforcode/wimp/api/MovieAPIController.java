@@ -55,7 +55,7 @@ public class MovieAPIController {
 		return movie;
 	}
 	
-	// THIS IS BRAND NEW!!!!! 
+	// This method was Thursday's assignment.
 	@PostMapping("{movieId}/actors")
 	public Movie associateAnActor(@PathVariable long movieId, @RequestBody Actor actor) {
 		Movie movie = movieRepo.findOne(movieId);

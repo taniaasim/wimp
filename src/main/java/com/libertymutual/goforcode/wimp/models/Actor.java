@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 public class Actor {
 
+	// FIELDS
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -38,6 +40,17 @@ public class Actor {
 	private Set<Award> awards;
 
 
+
+	public void addAward(Award award) {
+		if (awards == null) {
+			awards = new HashSet<Award>();
+		}
+		awards.add(award);
+		
+	}
+
+	
+	// GETTERS AND SETTERS START HERE
 	public Long getId() {
 		return id;
 	}
@@ -95,15 +108,6 @@ public class Actor {
 
 	public void setMovies(Set<Movie> movies) {
 		this.movies = movies;
-	}
-
-
-	public void addAward(Award award) {
-		if (awards == null) {
-			awards = new HashSet<Award>();
-		}
-		awards.add(award);
-		
 	}
 
 
